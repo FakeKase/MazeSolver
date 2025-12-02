@@ -7,6 +7,7 @@ class Main
 {
     public static void main(String[] args)
     {
+        //comment kub
         MazeData md = MazeGraphReader.readMazeAsGraph("./MazeFiles/m15_15.txt");
         Graph g = md.graph;
         System.out.println("StartID = " + g.getStartID());
