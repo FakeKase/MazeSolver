@@ -15,12 +15,12 @@ class Main
 
         Astar solver = new Astar();
         Long ans = solver.solve(g, g.getStartID(), g.getGoalID());
-        System.out.println("\nMin distance: "+ ans);
+        System.out.println("\nMin distance(Astar): "+ ans);
         g.PrintPath(md, g.getPath());
 
         Greedy solveGreedy = new Greedy();
         Long ansGreedy = solveGreedy.greedy(g, g.getStartID(), g.getGoalID());
-        System.out.println("\nMin distance: "+ ansGreedy);
+        System.out.println("\nMin distance(Greedy): "+ ansGreedy);
         g.PrintPath(md, g.getPath());
     }
 }
