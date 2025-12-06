@@ -7,8 +7,7 @@ class Main
 {
     public static void main(String[] args)
     {
-        //comment kub
-        MazeData md = MazeGraphReader.readMazeAsGraph("./MazeFiles/m15_15.txt");
+        MazeData md = MazeGraphReader.readMazeAsGraph("./MazeFiles/m30_30.txt");
         Graph g = md.graph;
         System.out.println("StartID = " + g.getStartID());
         System.out.println("GoalID = " + g.getGoalID());
@@ -19,5 +18,9 @@ class Main
         System.out.println("\nMin distance: "+ ans);
         g.PrintPath(md, g.getPath());
 
+        Greedy solveGreedy = new Greedy();
+        Long ansGreedy = solveGreedy.greedy(g, g.getStartID(), g.getGoalID());
+        System.out.println("\nMin distance: "+ ansGreedy);
+        g.PrintPath(md, g.getPath());
     }
 }
