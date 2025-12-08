@@ -3,6 +3,7 @@ import VeeBoSolver.DataStructure.*;
 import java.util.*;
 
 public class Dijkstra {
+    
     public long dijkstra(Graph g, long StartID, long GoalID){
         Set<Long> walking = new HashSet<>();
         HashMap<Long, Long> dist = new HashMap<>();

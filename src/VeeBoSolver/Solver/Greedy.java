@@ -3,6 +3,7 @@ import VeeBoSolver.DataStructure.*;
 import java.util.*;
 
 public class Greedy {
+    
     public long greedy(Graph g, long StartID, long GoalID){
         Set<Long> walking = new HashSet<>();
         Stack<Node> stack = new Stack<>();
@@ -37,6 +38,7 @@ public class Greedy {
         }
         Collections.reverse(Path);
         g.setPath(Path);
+        
         return sumWeight(Path);
     }
 
