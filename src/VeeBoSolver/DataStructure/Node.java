@@ -1,35 +1,41 @@
 package VeeBoSolver.DataStructure;
-import java.util.*;
 
-public class Node {
-    private final Long NodeID;
-    private final ArrayList<Edge> adjL;
-    private Long g;
-    private Long h;
-    private Long f;
+import java.util.Objects;
+
+public class Node 
+{
+    private int x,y,g;
     private Node parent;
 
-    public Node(Long id)
+    public Node(int r, int c, int g)
     {
-        this.NodeID = id;
-        this.adjL = new ArrayList<>();
-        this.g = Long.MAX_VALUE;
-        this.f = 0L;
-        this.h = 0L;
-        this.parent = null;
+        this.g = g;
+        this.x = r;
+        this.y = c;
     }
 
-    public long getID() {return this.NodeID;}
-    public ArrayList<Edge> getAdjL() {return this.adjL;}
-    public void addEdge(Edge path) {this.adjL.add(path);}
 
-    public void setG(Long value) {this.g = value;}
-    public void setF(Long value) {this.f = value;}
-    public void setH(Long value) {this.h = value;}
-    public long getH() {return this.h;}
-    public long getG() {return this.g;}
-    public long getF() {return this.f;}
+    @Override
+    public boolean equals(Object o) 
+    {
+        if (this == o) return true;
+        if (!(o instanceof Node)) return false;
+        Node a = (Node) o;
+        return this.x == a.x && this.y == a.y;
+    }
 
-    public Node getParent() {return this.parent;}
-    public void setParent(Node p) {this.parent = p;}
+    @Override
+    public int hashCode() 
+    {
+        return Objects.hash(x, y);
+    }
+
+    public int getX() { return this.x; }
+    public void setX(int x) { this.x = x; }
+    public int getY() { return this.y; }
+    public void setY(int y) { this.y = y; }
+    public int getCost() { return this.g; }
+    public void setCost(int g) { this.g = g; }
+    public Node getParent() { return this.parent; }
+    public void setParent(Node parent) { this.parent = parent; }
 }

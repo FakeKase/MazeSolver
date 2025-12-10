@@ -1,6 +1,6 @@
 package VeeBoSolver.Solver;
 
-import VeeBoSolver.DataStructure.MatrixNode;
+import VeeBoSolver.DataStructure.Node;
 
 import java.util.*;
 
@@ -9,9 +9,9 @@ public class ansPrinter
     public static final String GREEN = "\u001B[32m";
     public static final String RESET = "\u001B[0m";
 
-    public void printans(int[][] grid, ArrayList<MatrixNode> path)
+    public void printans(int[][] grid, ArrayList<Node> path)
     {
-        ArrayList<MatrixNode> pathtemp = new ArrayList<>(path);
+        ArrayList<Node> pathtemp = new ArrayList<>(path);
         int R = grid.length;
         int C = grid[0].length;
         String[][] display = new String[R][C];
@@ -23,9 +23,9 @@ public class ansPrinter
         {
             for (int c = 0; c < C; c++) 
             {
-                MatrixNode n = new MatrixNode(r, c, 0);
-                if (n.x == 1 && n.y == 1) display[r][c] = GREEN + "S";
-                else if (n.x == R - 2  && n.y == C - 2) display[r][c] = GREEN + "G";
+                Node n = new Node(r, c, 0);
+                if (n.getX() == 1 && n.getY() == 1) display[r][c] = GREEN + "S";
+                else if (n.getX() == R - 2  && n.getY() == C - 2) display[r][c] = GREEN + "G";
                 else if(grid[r][c] == -1)
                 {
                     String val = "#";

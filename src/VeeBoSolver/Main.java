@@ -8,29 +8,26 @@ class Main
 {
     public static void main(String[] args)
     {
-        int[][] grid = Reader.buildMatrix("./MazeFiles/m15_15.txt");
+        int[][] grid = Reader.buildMatrix("./MazeFiles/m100_100.txt");
         for(int[] i : grid)
         {
             System.out.println(Arrays.toString(i));
         }
-        // Graph g = grid.graph;
-        // System.out.println("StartID = " + g.getStartID());
-        // System.out.println("GoalID = " + g.getGoalID());
-        // g.PrintMaze(grid);
 
         Astar solver = new Astar();
         int ans = solver.solve(grid);
-        System.out.println("Min distance: "+ ans);
+        System.out.println("Min distance: " + ans);
 
+        System.out.println();
 
-        // Dijkstra solveDijkstra = new Dijkstra();
-        // Long ansDijkstra = solveDijkstra.dijkstra(g, g.getStartID(), g.getGoalID());
-        // System.out.println("\nMin distance: "+ ansDijkstra);
-        // g.PrintPath(md, g.getPath());
+        Dijkstra solver2 = new Dijkstra();
+        int ans2 = solver2.dijkstra(grid);
+        System.out.println("Min distance: " + ans2);
 
-        Greedy solveGreedy = new Greedy();
-        int ansGreedy = solveGreedy.greedy(grid, grid[1][1], grid[grid.length-2][grid.length-2]);
-        System.out.println("\nMin distance(Greedy): "+ ansGreedy);
-        // g.PrintPath(md, g.getPath());
+        System.out.println();
+
+        Greedy solve3 = new Greedy();
+        int ans3 = solve3.greedy(grid);
+        System.out.println("\nMin distance: " + ans3);
     }
 }
