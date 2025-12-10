@@ -1,5 +1,6 @@
 package VeeBoSolver;
 import VeeBoSolver.filereader.*;
+import VeeBoSolver.Solver.*;
 import java.util.Arrays;
 
 class Main
@@ -11,10 +12,10 @@ class Main
         {
             System.out.println(Arrays.toString(i));
         }
-        // Graph g = md.graph;
+        // Graph g = grid.graph;
         // System.out.println("StartID = " + g.getStartID());
         // System.out.println("GoalID = " + g.getGoalID());
-        // g.PrintMaze(md);
+        // g.PrintMaze(grid);
 
         // Astar solver = new Astar();
         // Long ans = solver.solve(g, g.getStartID(), g.getGoalID());
@@ -26,9 +27,9 @@ class Main
         // System.out.println("\nMin distance: "+ ansDijkstra);
         // g.PrintPath(md, g.getPath());
 
-        // Greedy solveGreedy = new Greedy();
-        // Long ansGreedy = solveGreedy.greedy(g, g.getStartID(), g.getGoalID());
-        // System.out.println("\nMin distance(Greedy): "+ ansGreedy);
+        Greedy solveGreedy = new Greedy();
+        int ansGreedy = solveGreedy.greedy(grid, grid[1][1], grid[grid.length-2][grid.length-2]);
+        System.out.println("\nMin distance(Greedy): "+ ansGreedy);
         // g.PrintPath(md, g.getPath());
     }
 }
