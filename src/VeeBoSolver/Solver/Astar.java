@@ -1,6 +1,5 @@
 package VeeBoSolver.Solver;
 import VeeBoSolver.DataStructure.*;
-import java.math.*;
 import java.util.*;
 
 public class Astar {
@@ -68,5 +67,82 @@ public class Astar {
         Long c2 = dist.getID() % 10000;
 
         return Math.abs(r1 - r2) + Math.abs(c1 - c2);
+    }
+
+    public int solve(int[][] grid)
+    {
+        int R = grid.length;
+        int C = grid[0].length;
+        int goalX = R - 2;
+        int goalY = C - 2;
+        int[][] gCost = new int[R][C];
+        for(int[] i : gCost)
+            {
+                Arrays.fill(i, Integer.MAX_VALUE);
+            }
+        gCost[1][1] = 0;
+            
+
+        PriorityQueue<MatrixNode> openSet = new PriorityQueue<>((a,b) -> 
+        {
+            int f1 = a.g + heuristic(a, goalX, goalY);
+            int f2 = b.g + heuristic(b, goalX, goalY);
+            return f1 - f2;
+        });
+
+        MatrixNode start = new MatrixNode(1, 1, 0);
+         MatrixNode goal = null;
+        openSet.add(start);
+
+        while(!openSet.isEmpty())
+        {
+            MatrixNode curr = openSet.poll();
+
+            if(curr.x == goalX && curr.y == goalY) 
+            {
+                goal = curr;
+                break;
+            }
+
+            int[][] directions = {{1,0}, {-1,0}, {0,1}, {0,-1}};
+
+            for(int[] dir : directions)
+            {
+                int nx = curr.x + dir[0];
+                int ny = curr.y + dir[1];
+
+                boolean outofgrid = nx < 0 || nx >= R || ny < 0 || ny >= C;
+
+                if(outofgrid) continue;
+
+                if(grid[nx][ny] == -1) continue;
+
+                int tentativeG = curr.g + grid[nx][ny];
+
+                if(tentativeG >= gCost[nx][ny]) continue;
+
+                gCost[nx][ny] = tentativeG;
+                MatrixNode next = new MatrixNode(nx, ny, tentativeG);
+                next.parent = curr;
+                openSet.add(next);
+            }
+        }
+
+        ArrayList<MatrixNode> Path = new ArrayList<>();
+        while(goal != null)
+        {
+            Path.add(goal);
+            goal = goal.parent;
+        }
+        Collections.reverse(Path);
+        ansPrinter ap = new ansPrinter();
+        ap.printans(grid, Path);
+        return gCost[goalX][goalY];
+
+    }
+
+    private int heuristic(MatrixNode a, int goalX, int goalY)
+    {
+        return Math.abs(goalX - a.x) + Math.abs(goalY - a.y);
     }
 }
