@@ -1,4 +1,5 @@
 package VeeBoSolver;
+import VeeBoSolver.Solver.*;
 import VeeBoSolver.filereader.*;
 import java.util.Arrays;
 
@@ -16,10 +17,10 @@ class Main
         // System.out.println("GoalID = " + g.getGoalID());
         // g.PrintMaze(md);
 
-        // Astar solver = new Astar();
-        // Long ans = solver.solve(g, g.getStartID(), g.getGoalID());
-        // System.out.println("\nMin distance(Astar): "+ ans);
-        // g.PrintPath(md, g.getPath());
+        Astar solver = new Astar();
+        int ans = solver.solve(grid);
+        System.out.println("Min distance: "+ ans);
+
 
         // Dijkstra solveDijkstra = new Dijkstra();
         // Long ansDijkstra = solveDijkstra.dijkstra(g, g.getStartID(), g.getGoalID());
