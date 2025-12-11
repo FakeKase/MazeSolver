@@ -1,7 +1,7 @@
 package VeeBoSolver;
 import VeeBoSolver.Solver.*;
+import VeeBoSolver.Solver.GA.*;
 import VeeBoSolver.filereader.*;
-import VeeBoSolver.Solver.*;
 import java.util.Arrays;
 
 class Main
@@ -20,14 +20,17 @@ class Main
 
         System.out.println();
 
-        Dijkstra solver2 = new Dijkstra();
-        int ans2 = solver2.dijkstra(grid);
-        System.out.println("Min distance: " + ans2);
+        // Dijkstra solver2 = new Dijkstra();
+        // int ans2 = solver2.dijkstra(grid);
+        // System.out.println("Min distance: " + ans2);
 
-        System.out.println();
+        // System.out.println();
 
-        Greedy solve3 = new Greedy();
-        int ans3 = solve3.greedy(grid);
-        System.out.println("\nMin distance: " + ans3);
+        // Greedy solve3 = new Greedy();
+        // int ans3 = solve3.greedy(grid);
+        // System.out.println("\nMin distance: " + ans3);
+
+        evolution ev = new evolution();
+        ev.solve(grid);
     }
 }
