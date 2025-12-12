@@ -6,7 +6,7 @@ import java.util.*;
 public class evolution 
 {
     public static final int POP_SIZE = 200;
-    public static final int MAX_GEN = 800;
+    public static final int MAX_GEN = 1000;
     public static final double MUTATION_RATE = 0.02;
     private final Random r = new Random();
 

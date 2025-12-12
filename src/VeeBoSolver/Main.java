@@ -8,7 +8,7 @@ class Main
 {
     public static void main(String[] args)
     {
-        int[][] grid = Reader.buildMatrix("./MazeFiles/m24_20.txt");
+        int[][] grid = Reader.buildMatrix("./MazeFiles/m40_40.txt");
         for(int[] i : grid)
         {
             System.out.println(Arrays.toString(i));
