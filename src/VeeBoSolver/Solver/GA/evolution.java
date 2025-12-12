@@ -141,7 +141,7 @@ public class evolution
         }
         ansPrinter ap = new ansPrinter();
         ap.clearScreen();
-        ap.printans(maze, path);
+        ap.printanstemp(maze, path);
         try { Thread.sleep(50); } catch (InterruptedException ex) {}
     }
 
