@@ -7,7 +7,7 @@ public class evolution
 {
     public static final int POP_SIZE = 200;
     public static final int MAX_GEN = 1000;
-    public static final double MUTATION_RATE = 0.02;
+    public static final double MUTATION_RATE = 0.05;
     private final Random r = new Random();
 
 
@@ -54,6 +54,7 @@ public class evolution
 
                 e.evaluate(offspring, maze);
                 offspring.setFitnessValue();
+                //printPath(offspring, maze);
                 nextGen.add(offspring);
             }
 
