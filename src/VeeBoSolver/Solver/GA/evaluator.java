@@ -40,7 +40,7 @@ public class evaluator
     }
 
 
-    private int[] decode(int gene)
+    public int[] decode(int gene)
     {
         return switch (gene) 
         {

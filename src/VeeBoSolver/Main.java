@@ -8,11 +8,14 @@ class Main
 {
     public static void main(String[] args)
     {
-        int[][] grid = Reader.buildMatrix("./MazeFiles/m100_100.txt");
+        int[][] grid = Reader.buildMatrix("./MazeFiles/m24_20.txt");
         for(int[] i : grid)
         {
             System.out.println(Arrays.toString(i));
         }
+
+        evolution ev = new evolution();
+        ev.solve(grid);
 
         Astar solver = new Astar();
         int ans = solver.solve(grid);
@@ -29,8 +32,5 @@ class Main
         // Greedy solve3 = new Greedy();
         // int ans3 = solve3.greedy(grid);
         // System.out.println("\nMin distance: " + ans3);
-
-        evolution ev = new evolution();
-        ev.solve(grid);
     }
 }

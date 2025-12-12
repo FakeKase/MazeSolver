@@ -1,7 +1,6 @@
 package VeeBoSolver.Solver;
 
 import VeeBoSolver.DataStructure.Node;
-
 import java.util.*;
 
 public class ansPrinter 
@@ -58,6 +57,12 @@ public class ansPrinter
             }
             System.out.println();
         }
+    }
+
+    public void clearScreen() 
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
 }
