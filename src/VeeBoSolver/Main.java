@@ -2,13 +2,17 @@ package VeeBoSolver;
 import VeeBoSolver.Solver.*;
 import VeeBoSolver.Solver.GA.*;
 import VeeBoSolver.filereader.*;
-import java.util.Arrays;
+import java.util.*;
 
 class Main
 {
     public static void main(String[] args)
     {
-        int[][] grid = Reader.buildMatrix("./MazeFiles/m15_15.txt");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter rows and columns: ");
+        String row = sc.next();
+        String column = sc.next();
+        int[][] grid = Reader.buildMatrix("./MazeFiles/m"+row+"_"+column+".txt");
         for(int[] i : grid)
         {
             System.out.println(Arrays.toString(i));
