@@ -57,7 +57,7 @@ public class Greedy {
         }
         Collections.reverse(Path);
         ansPrinter ap = new ansPrinter();
-        ap.printans(grid, Path);
+        ap.printanstemp(grid, Path);
         return cost;
     }
 }

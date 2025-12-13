@@ -44,10 +44,10 @@ public class ansPrinter
                 }
                 else 
                 {
-                    String val = String.valueOf(grid[r][c]);
-                    val = val.replaceAll("\"", "");
-                    if (val.length() == 1) val = "" + val;
-                    display[r][c] = RESET + val;
+                    // String val = String.valueOf(grid[r][c]);
+                    // val = val.replaceAll("\"", "");
+                    // if (val.length() == 1) val = " ";
+                    display[r][c] = RESET + " ";
                 }
             }        
         }

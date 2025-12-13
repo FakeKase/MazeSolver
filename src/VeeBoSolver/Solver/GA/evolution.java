@@ -5,12 +5,20 @@ import java.util.*;
 
 public class evolution 
 {
-    public static final int POP_SIZE = 200;
-    public static final int MAX_GEN = 1500;
-    public static final double MUTATION_RATE = 0.1;
+    private final int POP_SIZE;
+    private final int MAX_GEN;
+    private final double MUTATION_RATE;
     private final Random r = new Random();
 
+    public evolution(int POP_SIZE, int MAX_GEN, double MUTATION_RATE){
+        this.POP_SIZE = POP_SIZE;
+        this.MAX_GEN = MAX_GEN;
+        this.MUTATION_RATE = MUTATION_RATE;
+    }
 
+    public int getPop() {return this.POP_SIZE;}
+    public int getGen() {return this.MAX_GEN;}
+    public double getMutation() {return this.MUTATION_RATE;}
 
     public void solve(int[][] maze)
     {
@@ -60,7 +68,6 @@ public class evolution
 
             population = nextGen;
            
-            
         }
         printPath(globalBest, maze);
         if(globalBest.isReachable()) 

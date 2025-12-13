@@ -9,32 +9,79 @@ class Main
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter rows and columns: ");
-        String row = sc.next();
-        String column = sc.next();
-        int[][] grid = Reader.buildMatrix("./MazeFiles/m"+row+"_"+column+".txt");
-        for(int[] i : grid)
-        {
-            System.out.println(Arrays.toString(i));
+
+        int choice = 0;
+        while(true){
+            System.out.println("-------Select Algorithm to solve maze-------\n1. A* Algorithm\n2. Dijkstra Algorithm\n3. Greedy DFS Algorithm\n4. Genetic Algorithm");
+            System.out.print("Your choice(enter -1 to exit): ");
+            choice = sc.nextInt();
+
+            if(choice == -1 || choice > 4) break;
+
+            System.out.print("Enter rows and columns: ");
+            String row = sc.next();
+            String column = sc.next();
+            int[][] grid = Reader.buildMatrix("./MazeFiles/m"+row+"_"+column+".txt");
+            for(int[] i : grid)
+            {
+                System.out.println(Arrays.toString(i));
+            }
+            long start = System.nanoTime();
+
+            if(choice == 1){
+                Astar solver = new Astar();
+                int ans = solver.solve(grid);
+                System.out.println("Min distance: " + ans);
+
+            }else if(choice == 2){
+                Dijkstra solver2 = new Dijkstra();
+                int ans2 = solver2.dijkstra(grid);
+                System.out.println("Min distance: " + ans2);
+
+            }else if(choice == 3){
+                Greedy solve3 = new Greedy();
+                int ans3 = solve3.greedy(grid);
+                System.out.println("\nMin distance: " + ans3);
+
+            }else if(choice == 4){
+                evolution ev = new evolution(200, 1500, 0.1);
+                System.out.println("Population sizes: " + ev.getPop() + "\nNumber of Generations: " + ev.getGen() + "\nMutation Rate: " + ev.getMutation());
+                System.out.print("Do you want to edit parameter? (yes/no): ");
+                String temp = sc.next();
+
+                if(temp.toLowerCase().equals("yes")){
+                    System.out.println();
+                    System.out.println("What parameter you want to edit?\n1. Population sizes\n2. Number of Generations\n3. Mutation Rate");
+                    int c = sc.nextInt();
+
+                    if(c == -1 || c > 3) break;
+
+                    System.out.println();
+
+                    if(c == 1){
+                        System.out.print("Enter new Population sizes: ");
+                        int pop = sc.nextInt();
+                        ev = new evolution(pop, 1500, 0.1);
+                    }    
+                    else if(c == 2){
+                        System.out.print("Enter new Number of Generations: ");
+                        int gen = sc.nextInt();
+                        ev = new evolution(200, gen, 0.1);
+                    }
+                    else if(c == 3){
+                        System.out.print("Enter new Mutation Rate: ");
+                        int mu = sc.nextInt();
+                        ev = new evolution(200, 1500, mu);
+                    }
+                }
+                ev.solve(grid);
+            }
+
+            long end = System.nanoTime();
+            long temp = end - start;
+            double time = (double) temp / 1_000_000_000.0;
+            System.out.println("Run time: " + time + " s");
         }
-
-        evolution ev = new evolution();
-        ev.solve(grid);
-
-        Astar solver = new Astar();
-        int ans = solver.solve(grid);
-        System.out.println("Min distance: " + ans);
-
-        System.out.println();
-
-        // Dijkstra solver2 = new Dijkstra();
-        // int ans2 = solver2.dijkstra(grid);
-        // System.out.println("Min distance: " + ans2);
-
-        // System.out.println();
-
-        // Greedy solve3 = new Greedy();
-        // int ans3 = solve3.greedy(grid);
-        // System.out.println("\nMin distance: " + ans3);
+        sc.close();
     }
 }
