@@ -8,6 +8,7 @@ public class ansPrinter
     public static final String GREEN = "\u001B[32m";
     public static final String RESET = "\u001B[0m";
     public static final String GREEN_BG = "\u001B[42m";
+    public static final String WHITE_BG = "\u001B[47m";
     public static final String BLOCK = "  ";
 
     public void printans(int[][] grid, ArrayList<Node> path)
@@ -68,7 +69,7 @@ public class ansPrinter
         int C = grid[0].length;
         String[][] display = new String[R][C];
         for (int r = 0; r < R; r++) {
-            Arrays.fill(display[r], RESET + "#");
+            Arrays.fill(display[r], RESET + BLOCK);
         }
 
         for (int r = 0; r < R; r++) 
@@ -83,7 +84,7 @@ public class ansPrinter
                     String val = "#";
                     val = val.replaceAll("\"", "");
                     if (val.length() == 1) val = "" + val;
-                    display[r][c] = RESET + val;
+                    display[r][c] = WHITE_BG + BLOCK + RESET;
                 }
                 else if (path.contains(n))
                 {
@@ -97,7 +98,7 @@ public class ansPrinter
                     String val = String.valueOf(grid[r][c]);
                     val = val.replaceAll("\"", "");
                     if (val.length() == 1) val = "" + val;
-                    display[r][c] = RESET + val;
+                    display[r][c] = RESET + BLOCK;
                 }
             }        
         }
@@ -110,7 +111,7 @@ public class ansPrinter
                 {
                     System.out.print(display[r][c] + "");
                 }
-                else System.out.print(display[r][c] + " ");
+                else System.out.print(display[r][c] + "");
             }
             System.out.println();
         }

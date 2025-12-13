@@ -7,7 +7,7 @@ public class evolution
 {
     public static final int POP_SIZE = 200;
     public static final int MAX_GEN = 1500;
-    public static final double MUTATION_RATE = 0.05;
+    public static final double MUTATION_RATE = 0.1;
     private final Random r = new Random();
 
 
@@ -32,8 +32,8 @@ public class evolution
         long start = System.currentTimeMillis();
         long limit = 60000;
 
-        for(int gen = 0 ; gen < MAX_GEN ; gen++) //run by number of gens
-        //while(System.currentTimeMillis() - start < limit) //run by time
+        //for(int gen = 0 ; gen < MAX_GEN ; gen++) //run by number of gens
+        while(System.currentTimeMillis() - start < limit) //run by time
         {
             List<genome> nextGen = new ArrayList<>();
             genome best = getElite(population);
