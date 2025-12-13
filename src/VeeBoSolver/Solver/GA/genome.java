@@ -15,7 +15,7 @@ public class genome
         int goalX = maze.length - 2;
         int goalY = maze[0].length - 2;
         int minSteps = Math.abs(goalX - 1) + Math.abs(goalY - 1);
-        chromosome = new int[maze.length * maze[0].length];
+        chromosome = new int[maze.length * maze[0].length / 4];
         Random r = new Random();
         for (int i = 0; i < chromosome.length; i++) 
         {
