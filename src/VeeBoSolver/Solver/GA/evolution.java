@@ -8,7 +8,7 @@ public class evolution
     private final int POP_SIZE;
     private final int MAX_GEN;
     private final double MUTATION_RATE;
-    private final int MAX_REP = 200;
+    private final int MAX_REP = 100;
     private final Random r = new Random();
 
     public evolution(int POP_SIZE, int MAX_GEN, double MUTATION_RATE){
@@ -34,7 +34,6 @@ public class evolution
         for(genome g : population)
         {
             e.evaluate(g, maze);
-            g.setFitnessValue();
         }
         genome globalBest = null;
         int repetition = 0;
@@ -65,7 +64,6 @@ public class evolution
                 mutate(offspring);
 
                 e.evaluate(offspring, maze);
-                offspring.setFitnessValue();
                 //printPath(offspring, maze);
                 nextGen.add(offspring);
             }
@@ -74,7 +72,7 @@ public class evolution
            
         }
         printPath(globalBest, maze);
-        if(globalBest.isReachable()) 
+        if(globalBest.isReachable())
         {
             System.out.println("Minimum cost: " + globalBest.getCost());
         }
@@ -124,9 +122,12 @@ public class evolution
 
     private void mutate(genome g)
     {
+        double rate = MUTATION_RATE;
+        if (g.isReachable()) rate *= 0.3;
+
         for(int i = 0; i < g.length(); i++)
         {
-            if(r.nextDouble() < MUTATION_RATE)
+            if(r.nextDouble() < rate)
             {
                 g.setGeneAt(i, r.nextInt(4));
             }

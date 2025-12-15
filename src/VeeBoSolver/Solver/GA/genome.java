@@ -12,7 +12,7 @@ public class genome
     
     public genome(int[][] maze)
     {
-        chromosome = new int[maze.length * maze[0].length / 4];
+        chromosome = new int[maze.length * maze[0].length];
         Random r = new Random();
         for (int i = 0; i < chromosome.length; i++) 
         {
@@ -36,6 +36,8 @@ public class genome
     public boolean isReachable() {return this.Reached;}
     public int getCost() {return this.cost;}
     public int getDistance() {return this.distanceToGoal;}
+    public int getCollision() {return this.collisions;}
+    public int getStep() {return this.stepsTaken;}
     public int[] getFinalAxis() {return new int[]{this.finalX, this.finalY};}
     public void setDistance(int dist) {this.distanceToGoal = dist;}
     public void setCost(int cost) {this.cost = cost;}
@@ -44,29 +46,6 @@ public class genome
     public void walked() {this.stepsTaken++;}
     public void SetIsReached() {this.Reached = true;}
     public double getFitnessValue() {return this.fitnessValue;}
-    public void setFitnessValue() {this.fitnessValue = this.fitness();}
-
-    private double fitness()
-    {
-        fitnessValue = 0;
-
-        double distanceScore = 1000 / (distanceToGoal + 1);
-        double costScore = 5000 / (cost + 1);
-        fitnessValue += distanceScore + costScore;
-
-        fitnessValue -= collisions * 5;
-        fitnessValue -= stepsTaken * 0.5;
-
-        if (this.Reached) 
-        {
-            fitnessValue += 10000;
-            fitnessValue += 8000.0 / (cost + 1);
-            double shortnessBonus = (chromosome.length - stepsTaken) * 10;
-            fitnessValue += shortnessBonus;
-        }
-
-        return fitnessValue;
-    }
 
     public void resetState() 
     {
@@ -77,8 +56,13 @@ public class genome
         this.distanceToGoal = Integer.MAX_VALUE;
         this.Reached = false;
         this.cost = 0;
-        this.fitnessValue = 0;
     }
+
+    public void setFitnessValue(double value) 
+    {
+        this.fitnessValue = value;
+    }
+
 
     public genome copy() 
     {
