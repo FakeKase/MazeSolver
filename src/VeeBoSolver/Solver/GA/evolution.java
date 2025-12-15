@@ -8,7 +8,7 @@ public class evolution
     private final int POP_SIZE;
     private final int MAX_GEN;
     private final double MUTATION_RATE;
-    private final int MAX_REP = 100;
+    private final int MAX_REP = 200;
     private final Random r = new Random();
 
     public evolution(int POP_SIZE, int MAX_GEN, double MUTATION_RATE){
