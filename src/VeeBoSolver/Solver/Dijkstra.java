@@ -60,7 +60,7 @@ public class Dijkstra {
         }
         Collections.reverse(Path);
         ansPrinter ap = new ansPrinter();
-        ap.printans(grid, Path);
+        ap.printanstemp(grid, Path);
         return dist[goalX][goalY];
     }
 }
