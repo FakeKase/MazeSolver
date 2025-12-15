@@ -12,9 +12,6 @@ public class genome
     
     public genome(int[][] maze)
     {
-        int goalX = maze.length - 2;
-        int goalY = maze[0].length - 2;
-        int minSteps = Math.abs(goalX - 1) + Math.abs(goalY - 1);
         chromosome = new int[maze.length * maze[0].length / 4];
         Random r = new Random();
         for (int i = 0; i < chromosome.length; i++) 
@@ -30,10 +27,7 @@ public class genome
         this.fitnessValue = 0;
     }
 
-    public genome(int length) 
-    {
-    chromosome = new int[length];
-    }
+    public genome(int length) { chromosome = new int[length]; }
 
 
     public int getGeneAt(int index) {return this.chromosome[index];}
@@ -54,7 +48,7 @@ public class genome
 
     private double fitness()
     {
-        double fitnessValue = 0;
+        fitnessValue = 0;
 
         // Reward closeness to goal
         double distanceScore = 1000 / (distanceToGoal + 1);

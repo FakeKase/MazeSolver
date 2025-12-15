@@ -8,6 +8,7 @@ public class evolution
     private final int POP_SIZE;
     private final int MAX_GEN;
     private final double MUTATION_RATE;
+    private final int MAX_REP = 100;
     private final Random r = new Random();
 
     public evolution(int POP_SIZE, int MAX_GEN, double MUTATION_RATE){
@@ -36,7 +37,7 @@ public class evolution
             g.setFitnessValue();
         }
         genome globalBest = null;
-
+        int repetition = 0;
         long start = System.currentTimeMillis();
         long limit = 60000;
 
@@ -47,8 +48,11 @@ public class evolution
             genome best = getElite(population);
             if(globalBest == null || best.getFitnessValue() > globalBest.getFitnessValue()) 
             {
+                repetition = 0;
                 globalBest = best.copy();
             }
+            else if(repetition >= MAX_REP) break;
+            else repetition++;
             printPath(best, maze);
             genome elite = globalBest.copy();
             nextGen.add(elite);
