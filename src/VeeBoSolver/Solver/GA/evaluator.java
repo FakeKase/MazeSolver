@@ -18,15 +18,27 @@ public class evaluator
             int nx = pos[0] + dir[0];
             int ny = pos[1] + dir[1];
             boolean outOfBounds = nx < 0 || nx >= maze.length || ny < 0 || ny >= maze[0].length;
-            if(outOfBounds || maze[nx][ny] == -1) {g.Collided(); continue;}
+            if(outOfBounds || maze[nx][ny] == -1)
+            {
+                    g.Collided();
+                    g.setCost(g.getCost() + 50);
+                    continue;
+            }
             else
             {
                 g.walked();
                 pos[0] = nx; pos[1] = ny;
-                if (visited[pos[0]][pos[1]]) { g.Collided(); continue; }
+                if (visited[pos[0]][pos[1]])
+                {
+                    g.Collided();
+                    g.setCost(g.getCost() + 30);
+                    continue;
+                }
                 visited[pos[0]][pos[1]] = true;
+                g.setRealCost(g.getRealCost() + maze[pos[0]][pos[1]]);
                 int currCost = g.getCost();
                 currCost += maze[pos[0]][pos[1]];
+                currCost += manhattan(maze, pos); 
                 g.setCost(currCost);
             } 
 
@@ -42,17 +54,21 @@ public class evaluator
             lastX = pos[0];
             lastY = pos[1];
 
-            if(pos[0] == goalX && pos[1] == goalY) { g.SetIsReached(); break; }
+            if(pos[0] == goalX && pos[1] == goalY) { g.setRealCost(g.getRealCost() + maze[pos[0]][pos[1]]); g.SetIsReached(); break; }
 
         }
         
         g.setDistance(manhattan(maze, pos));
         g.SetFinalAxis(pos[0], pos[1]);
 
-        double fitness;
+        int dist = g.getDistance();
 
-        if (g.isReachable()) fitness = 100000 - g.getCost() * 10 - g.getDistance() * 5 - g.getStep() * 2;
-        else fitness = 5000 - g.getDistance() * 50 - g.getCollision() * 100 - g.getStep();   
+        double fitness =
+                200000
+                - g.getRealCost() * 50
+                - g.getStep() * 2
+                - g.getCollision() * 300
+                - dist * 200;
 
         g.setFitnessValue(Math.max(1, fitness));
     }

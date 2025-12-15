@@ -8,11 +8,12 @@ public class genome
     private boolean Reached;
     private int finalX, finalY, collisions, stepsTaken, distanceToGoal, cost;
     private double fitnessValue;
+    private int realCost = 0;
 
     
     public genome(int[][] maze)
     {
-        chromosome = new int[maze.length * maze[0].length];
+        chromosome = new int[(maze.length * maze[0].length) / 2];
         Random r = new Random();
         for (int i = 0; i < chromosome.length; i++) 
         {
@@ -25,6 +26,7 @@ public class genome
         this.stepsTaken = 0;
         this.cost = 0;
         this.fitnessValue = 0;
+        this.realCost = 0;
     }
 
     public genome(int length) { chromosome = new int[length]; }
@@ -46,6 +48,8 @@ public class genome
     public void walked() {this.stepsTaken++;}
     public void SetIsReached() {this.Reached = true;}
     public double getFitnessValue() {return this.fitnessValue;}
+    public int getRealCost() { return realCost; }
+    public void setRealCost(int cost) {realCost = cost; }
 
     public void resetState() 
     {
@@ -56,6 +60,7 @@ public class genome
         this.distanceToGoal = Integer.MAX_VALUE;
         this.Reached = false;
         this.cost = 0;
+        this.realCost = 0;
     }
 
     public void setFitnessValue(double value) 
@@ -76,7 +81,7 @@ public class genome
         g.distanceToGoal = this.distanceToGoal;
         g.cost = this.cost;
         g.fitnessValue = this.fitnessValue;
-
+        g.realCost = this.realCost;
         return g;
     }
 

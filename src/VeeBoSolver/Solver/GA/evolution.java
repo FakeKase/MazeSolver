@@ -10,6 +10,7 @@ public class evolution
     private final double MUTATION_RATE;
     private final int MAX_REP = 100;
     private final Random r = new Random();
+    
 
     public evolution(int POP_SIZE, int MAX_GEN, double MUTATION_RATE){
         this.POP_SIZE = POP_SIZE;
@@ -74,9 +75,9 @@ public class evolution
         printPath(globalBest, maze);
         if(globalBest.isReachable())
         {
-            System.out.println("Minimum cost: " + globalBest.getCost());
+            System.out.println("Minimum cost: " + globalBest.getRealCost());
         }
-        else System.out.println("Minimum cost(Not found): " + globalBest.getCost());
+        else System.out.println("Minimum cost(Not found): " + globalBest.getRealCost());
 
     }
 
@@ -125,7 +126,10 @@ public class evolution
         double rate = MUTATION_RATE;
         if (g.isReachable()) rate *= 0.3;
 
-        for(int i = 0; i < g.length(); i++)
+        int protect = Math.max(2, g.getStep());
+        protect = Math.min(protect, g.length() / 2);
+
+        for(int i = protect; i < g.length(); i++)
         {
             if(r.nextDouble() < rate)
             {
