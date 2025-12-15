@@ -51,7 +51,7 @@ public class evolution
                 repetition = 0;
                 globalBest = best.copy();
             }
-            else if(repetition >= MAX_REP) break;
+            else if(repetition >= MAX_REP && best.isReachable()) break;
             else repetition++;
             printPath(best, maze);
             genome elite = globalBest.copy();

@@ -50,12 +50,10 @@ public class genome
     {
         fitnessValue = 0;
 
-        // Reward closeness to goal
         double distanceScore = 1000 / (distanceToGoal + 1);
         double costScore = 5000 / (cost + 1);
         fitnessValue += distanceScore + costScore;
 
-        //punish
         fitnessValue -= collisions * 5;
         fitnessValue -= stepsTaken * 0.5;
 
