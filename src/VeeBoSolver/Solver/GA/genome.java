@@ -13,7 +13,7 @@ public class genome
     
     public genome(int[][] maze)
     {
-        chromosome = new int[(maze.length * maze[0].length) / 2];
+        chromosome = new int[(maze.length * maze[0].length)];
         Random r = new Random();
         for (int i = 0; i < chromosome.length; i++) 
         {

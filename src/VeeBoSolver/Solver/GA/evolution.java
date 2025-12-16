@@ -51,7 +51,25 @@ public class evolution
                 repetition = 0;
                 globalBest = best.copy();
             }
-            else if(repetition >= MAX_REP && best.isReachable()) break;
+            else if(repetition >= MAX_REP)
+            {
+                if(best.isReachable())
+                {
+                    break;
+                }
+                else if (repetition >= MAX_REP / 4)
+                {
+                    population.clear();
+                    population.add(globalBest);
+                    for(int i = 0; i < POP_SIZE; i++)
+                    {
+                        genome g = new genome(maze);
+                        e.evaluate(g, maze);
+                        population.add(g);
+                        repetition = 0;
+                    }
+                }
+            }
             else repetition++;
             printPath(best, maze);
             genome elite = globalBest.copy();
@@ -126,10 +144,7 @@ public class evolution
         double rate = MUTATION_RATE;
         if (g.isReachable()) rate *= 0.3;
 
-        int protect = Math.max(2, g.getStep());
-        protect = Math.min(protect, g.length() / 2);
-
-        for(int i = protect; i < g.length(); i++)
+        for(int i = 0; i < g.length(); i++)
         {
             if(r.nextDouble() < rate)
             {

@@ -31,15 +31,21 @@ public class evaluator
                 if (visited[pos[0]][pos[1]])
                 {
                     g.Collided();
-                    g.setCost(g.getCost() + 30);
+                    g.setCost(g.getCost() + 300);
                     continue;
                 }
                 visited[pos[0]][pos[1]] = true;
-                g.setRealCost(g.getRealCost() + maze[pos[0]][pos[1]]);
-                int currCost = g.getCost();
-                currCost += maze[pos[0]][pos[1]];
-                currCost += manhattan(maze, pos); 
-                g.setCost(currCost);
+                g.setRealCost(g.getRealCost() + maze[pos[0]][pos[1]]);  
+                int newDist = manhattan(maze, pos);
+                int oldDist = manhattan(maze, new int[]{lastX, lastY});
+                if (newDist < oldDist) 
+                {
+                    g.setCost(g.getCost() - 40);
+                } 
+                else 
+                {
+                    g.setCost(g.getCost() + 40);
+                }
             } 
 
             if (pos[0] == lastX && pos[1] == lastY) 
@@ -61,14 +67,10 @@ public class evaluator
         g.setDistance(manhattan(maze, pos));
         g.SetFinalAxis(pos[0], pos[1]);
 
-        int dist = g.getDistance();
+        double fitness;
 
-        double fitness =
-                200000
-                - g.getRealCost() * 50
-                - g.getStep() * 2
-                - g.getCollision() * 300
-                - dist * 200;
+        if (g.isReachable()) fitness = 10_000_000 - g.getRealCost() * 1000;
+        else fitness = 1_000 - g.getDistance() * 100;
 
         g.setFitnessValue(Math.max(1, fitness));
     }
